@@ -13,6 +13,18 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  modules: [
+    '@nuxtjs/axios',
+  ],
+
+  axios: {
+    baseURL: 'http://localhost:8000/api/' 
+  },
+
+  css: [
+  '~assets/styles/app.scss'
+  ],
   /*
   ** Customize the progress bar color
   */
