@@ -16,8 +16,14 @@ export const mutations = {
 
 export const actions = {
 	async nuxtServerInit({ commit }) {
-		let response = await this.$axios.$get('categories')
+		try {
+			let response = await this.$axios.$get('categories')
 
-		commit('SET_CATEGORIES', response.data)
+			commit('SET_CATEGORIES', response.data)
+		} catch(e) {
+			// statements
+			console.log(e.response);
+		}
+		
 	}
 }
