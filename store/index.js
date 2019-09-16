@@ -15,11 +15,15 @@ export const mutations = {
 }
 
 export const actions = {
-	async nuxtServerInit({ commit }) {
+	async nuxtServerInit({ commit, dispatch }) {
 		try {
 			let response = await this.$axios.$get('categories')
 
 			commit('SET_CATEGORIES', response.data)
+
+			if(this.$auth.loggedIn) {
+				await dispatch('cart/getCart')
+			}
 		} catch(e) {
 			// statements
 			console.log(e.response);
