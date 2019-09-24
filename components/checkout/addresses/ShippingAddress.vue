@@ -70,11 +70,11 @@
 			}
 		},
 
-		// watch: {
-		// 	selectedAddress () {
-		// 		this.selecting = false
-		// 	}
-		// },
+		watch: {
+			selectedAddress (address) {
+				this.$emit('input', address.id)
+			}
+		},
 
 		computed: {
 			defaultAddress() {
