@@ -152,7 +152,8 @@
 		methods: {
 			...mapActions({
 				setShipping: 'cart/setShipping',
-				getCart: 'cart/getCart'
+				getCart: 'cart/getCart',
+				flash: 'alert/flash'
 			}),
 
 			async order () {
@@ -171,8 +172,12 @@
 					})
 				} catch(e) {
 					// statements
-					console.log(e);
+					this.flash(e.response.data.message)
+
+					this.getCart()
 				}
+
+				this.submitting = false
 			},
 
 			async getShippingMethodsForAddress (addressId) {
