@@ -8,6 +8,12 @@
 						v-model="form.address_id"
 					/>
 
+
+					<PaymentMethods
+						:payment-methods="paymentMethods"
+						v-model="form.payment_method_id"
+					/>
+
 					<article class="message">
 						<div class="message-body">
 							<h1 class="title is-5">Payment</h1>
@@ -98,6 +104,7 @@
 
 	import CartOverview from '@/components/cart/CartOverview'
 	import ShippingAddress from '@/components/checkout/addresses/ShippingAddress'
+	import PaymentMethods from '@/components/checkout/paymentMethods/PaymentMethods'
 
 	export default {
 		data() {
@@ -106,8 +113,10 @@
 				addresses: [],
 				form : {
 					address_id: null,
+					payment_method_id: null,
 				},
-				shippingMethods: []
+				shippingMethods: [],
+				paymentMethods: [],
 			}
 		},
 
@@ -125,7 +134,8 @@
 
 		components: {
 			CartOverview,
-			ShippingAddress
+			ShippingAddress,
+			PaymentMethods,
 		},
 
 		computed: {
@@ -191,9 +201,11 @@
 
 		async asyncData ({ app }) {
 			let addresses = await app.$axios.$get('addresses')
+			let paymentMethods = await app.$axios.$get('payment-methods')
 
 			return {
-				addresses: addresses.data
+				addresses: addresses.data,
+				paymentMethods: paymentMethods.data,
 			}
 		}
 	}
